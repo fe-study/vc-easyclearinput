@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+    <title>example</title>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            background: rgba(119, 129, 149, 0.8);
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+        }
+        .container label {
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">@Vue Component - vc-easyclearinput</h1>
+
+    <div id="app" class="container">
+        <vc-easyclearinput
+            :type="type"
+            :autofocus="autofocus"
+            :value.sync="value"
+            :label="label"
+            :placeholder="placeholder"
+            :on-input="onInput"
+            :on-change="onChange"
+            :on-focus="onFocus"
+            :on-blur="onBlur"
+            :on-clear="onClear"
+        >
+        </vc-easyclearinput>
+
+        <div class="form-group">
+            <label>配置组件的label属性</label>
+            <input type="text" class="form-control" placeholder="label" v-model="label" />
+        </div>
+
+        <div class="form-group">
+            <label>配置组件的type</label>
+            <input type="text" class="form-control" type="type" v-model="type" />
+        </div>
+
+        <div class="form-group">
+            <label>配置组件的value(sync)</label>
+            <input type="text" class="form-control" placeholder="value" v-model="value">
+        </div>
+
+        <div class="form-group">
+            <label>配置组件的placeholder</label>
+            <input type="text" class="form-control" placeholder="placeholder" v-model="placeholder" />
+        </div>
+
+        <div class="form-group">
+            <div>autofocus - 是否自动focus(默认: false)</div>
+            <label><input type="radio" :value="bools.true" name="autofocus" v-model="autofocus">是</label>
+            <label><input type="radio" :value="bools.false" name="autofocus" v-model="autofocus">否</label>
+        </div>
+
+    </div>
+    <script src='../dist/example.js'></script>
+</body>
+</html>
