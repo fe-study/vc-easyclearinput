@@ -549,17 +549,15 @@ exports.default = {
     },
     created: function created() {},
     ready: function ready() {
-        this.focusInput();
+        if (this.autofocus) {
+            this.focusInput();
+        }
     },
     computed: {},
     watch: {
-        autofocus: {
-            immediate: true,
-            deep: true,
-            handler: function handler(val) {
-                if (val) {
-                    this.focusInput();
-                }
+        autofocus: function autofocus(val) {
+            if (val) {
+                this.focusInput();
             }
         }
     },

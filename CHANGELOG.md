@@ -1,5 +1,11 @@
 <h1 align="center">vc-easyclearinput - @changelog</h1>
 
+## 0.1.2
+
+`2016-0824`
+
+- 修正 `autofocus` 功能
+
 ## 0.0.9 `prerelease`
 
 `2016-08-18`

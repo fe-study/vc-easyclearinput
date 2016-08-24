@@ -19,6 +19,13 @@
 
 ## Dev
 
+* dev
+
+```node
+npm run dev
+
+```
+
 * build
 
 ```node

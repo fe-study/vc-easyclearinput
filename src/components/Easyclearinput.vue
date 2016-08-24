@@ -85,19 +85,17 @@ export default {
 
     },
     ready: function () {
-        this.focusInput()
+        if (this.autofocus) {
+            this.focusInput()
+        }
     },
     computed: {
 
     },
     watch: {
-        autofocus: {
-            immediate: true,
-            deep: true,
-            handler: function (val) {
-                if (val) {
-                    this.focusInput()
-                }
+        autofocus (val) {
+            if (val) {
+                this.focusInput()
             }
         }
     },
