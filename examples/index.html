@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./static/css/bootstrap.min.css">
-    <title>example</title>
+    <title>demo - vc-easyclearinput</title>
     <style>
+        [v-cloak] {
+            visibility: hidden;
+        }
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -15,26 +18,39 @@
             background: rgba(119, 129, 149, 0.8);
         }
         .container {
-            width: 300px;
+            width: 400px;
             padding: 20px;
+            padding-top: 30px;
         }
         .container label {
             font-weight: normal;
+        }
+        .container .btn {
+            margin-right: 10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <h1 align="center">@Vue Component - vc-easyclearinput</h1>
+    <div class="text-center">提供对原生Input组件的封装，但不提供value校验功能，请在父组件或第三方插件中校验,并透传提示信息(`infoText`)</div>
     <hr>
 
-    <div id="app" class="container">
+    <div id="app" class="container" v-cloak>
 
         <vc-easyclearinput
+            v-if="noSlot"
             :type="type"
-            :autofocus="autofocus"
-            :value.sync="value"
             :label="label"
             :placeholder="placeholder"
+            :info-text="infoText"
+            :value.sync="value"
+            :autofocus="autofocus"
+            :disabled="disabled"
+            :read-only="readOnly"
+            :width="width"
+            :icon="icon"
+            :status="status"
             :on-input="onInput"
             :on-change="onChange"
             :on-focus="onFocus"
@@ -42,6 +58,42 @@
             :on-clear="onClear"
         >
         </vc-easyclearinput>
+
+        <vc-easyclearinput
+            v-if="!noSlot"
+            :type="type"
+            :label="label"
+            :placeholder="placeholder"
+            :value.sync="value"
+            :info-text="infoText"
+            :autofocus="autofocus"
+            :disabled="disabled"
+            :read-only="readOnly"
+            :width="width"
+            :icon="icon"
+            :status="status"
+            :on-input="onInput"
+            :on-change="onChange"
+            :on-focus="onFocus"
+            :on-blur="onBlur"
+            :on-clear="onClear"
+        >
+            <span slot="input-before" class="input-group-addon">@</span>
+        </vc-easyclearinput>
+
+        <button class="btn btn-info" @click="commonFn">普通版</button>
+        <button class="btn btn-success" @click="successIconFn">带success图标</button>
+        <button class="btn btn-danger" @click="emailFn">带邮箱@符号</button>
+        <button class="btn btn-default" @click="disabledFn">disabled</button>
+        <button class="btn btn-default" @click="readOnlyFn">readOnly</button>
+
+        <hr>
+
+        <div class="form-group">
+            <div>是否使用slot: input-before(demo配置)</div>
+            <label><input type="radio" :value="bools.false" name="noSlot" v-model="noSlot">是</label>
+            <label><input type="radio" :value="bools.true" name="noSlot" v-model="noSlot">否</label>
+        </div>
 
         <div class="form-group">
             <label>配置组件的label属性</label>
@@ -51,6 +103,11 @@
         <div class="form-group">
             <label>配置组件的type</label>
             <input type="text" class="form-control" type="type" v-model="type" />
+        </div>
+
+        <div class="form-group">
+            <label>配置组件的width</label>
+            <input width="text" class="form-control" width="width" v-model="width" />
         </div>
 
         <div class="form-group">
@@ -64,7 +121,37 @@
         </div>
 
         <div class="form-group">
-            <div>autofocus - 是否自动focus(默认: false)</div>
+            <label>配置组件的infoText</label>
+            <input type="text" class="form-control" placeholder="infoText" v-model="infoText" />
+        </div>
+
+        <div class="form-group">
+            <div>配置组件的status - (默认: '')</div>
+            <label><input type="radio" value="success" name="status" v-model="status">success</label>
+            <label><input type="radio" value="warning" name="status" v-model="status">warning</label>
+            <label><input type="radio" value="error" name="status" v-model="status">error</label>
+        </div>
+
+        <div class="form-group">
+            <div>配置组件的icon - (默认: false)</div>
+            <label><input type="radio" :value="bools.true" name="icon" v-model="icon">是</label>
+            <label><input type="radio" :value="bools.false" name="icon" v-model="icon">否</label>
+        </div>
+
+        <div class="form-group">
+            <div>配置组件的disabled - (默认: false)</div>
+            <label><input type="radio" :value="bools.true" name="disabled" v-model="disabled">是</label>
+            <label><input type="radio" :value="bools.false" name="disabled" v-model="disabled">否</label>
+        </div>
+
+        <div class="form-group">
+            <div>配置组件的readOnly - (默认: false)</div>
+            <label><input type="radio" :value="bools.true" name="readOnly" v-model="readOnly">是</label>
+            <label><input type="radio" :value="bools.false" name="readOnly" v-model="readOnly">否</label>
+        </div>
+
+        <div class="form-group">
+            <div>配置组件的autofocus - 是否自动focus(默认: false)</div>
             <label><input type="radio" :value="bools.true" name="autofocus" v-model="autofocus">是</label>
             <label><input type="radio" :value="bools.false" name="autofocus" v-model="autofocus">否</label>
         </div>

@@ -71,19 +71,162 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 47);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
+/* 0 */
+/***/ function(module, exports) {
+
+var core = module.exports = {version: '2.4.0'};
+if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+module.exports = function(it){
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-__webpack_require__(3)
-module.exports = __webpack_require__(7)
+// Thank's IE8 for his funny defineProperty
+module.exports = !__webpack_require__(3)(function(){
+  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+});
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+module.exports = function(exec){
+  try {
+    return !!exec();
+  } catch(e){
+    return true;
+  }
+};
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+
+/***/ },
+/* 5 */,
+/* 6 */
+/***/ function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function(it){
+  if(it == undefined)throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+var global    = __webpack_require__(4)
+  , core      = __webpack_require__(0)
+  , ctx       = __webpack_require__(22)
+  , hide      = __webpack_require__(26)
+  , PROTOTYPE = 'prototype';
+
+var $export = function(type, name, source){
+  var IS_FORCED = type & $export.F
+    , IS_GLOBAL = type & $export.G
+    , IS_STATIC = type & $export.S
+    , IS_PROTO  = type & $export.P
+    , IS_BIND   = type & $export.B
+    , IS_WRAP   = type & $export.W
+    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+    , expProto  = exports[PROTOTYPE]
+    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
+    , key, own, out;
+  if(IS_GLOBAL)source = name;
+  for(key in source){
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if(own && key in exports)continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function(C){
+      var F = function(a, b, c){
+        if(this instanceof C){
+          switch(arguments.length){
+            case 0: return new C;
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if(IS_PROTO){
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library` 
+module.exports = $export;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+// 7.1.4 ToInteger
+var ceil  = Math.ceil
+  , floor = Math.floor;
+module.exports = function(it){
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = __webpack_require__(28)
+  , defined = __webpack_require__(6);
+module.exports = function(it){
+  return IObject(defined(it));
+};
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+__webpack_require__(12)
+module.exports = __webpack_require__(46)
 
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(6)
+;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(15)
 if (false) {
 (function () {
 var hotAPI = require("vue-hot-reload-api")
@@ -101,7 +244,7 @@ hotAPI.update(id, newOptions, newTemplate)
 }
 
 /***/ },
-/* 2 */
+/* 11 */
 /***/ function(module, exports) {
 
 /*
@@ -353,16 +496,16 @@ function updateLink(linkElement, obj) {
 
 
 /***/ },
-/* 3 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(4);
+var content = __webpack_require__(13);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(2)(content, {});
+var update = __webpack_require__(11)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -379,21 +522,21 @@ if(false) {
 }
 
 /***/ },
-/* 4 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(14)();
 // imports
 
 
 // module
-exports.push([module.i, ".vc-easyclearinput-component .input-box {\n  display: inline-block;\n  position: relative;\n}\n.vc-easyclearinput-component .input-box:hover .clear-it {\n  visibility: visible;\n}\n.vc-easyclearinput-component .input-box .clear-it {\n  visibility: hidden;\n  position: absolute;\n  top: 50%;\n  right: 6px;\n  -webkit-transform: translateY(-50%);\n  transform: translateY(-50%);\n  opacity: .3;\n}\n", ""]);
+exports.push([module.i, ".vc-easyclearinput-component .label-item {\n  font-weight: normal;\n  margin-right: 5px;\n  display: table;\n  vertical-align: bottom;\n  float: left;\n  height: 34px;\n  line-height: 34px;\n}\n.vc-easyclearinput-component .glyphicon {\n  z-index: 9;\n}\n.vc-easyclearinput-component .input-box {\n  display: table;\n  position: relative;\n}\n.vc-easyclearinput-component .input-box .form-control {\n  width: 100%;\n}\n.vc-easyclearinput-component .input-box:hover .clear-it {\n  visibility: visible;\n}\n.vc-easyclearinput-component .input-box .clear-it {\n  visibility: hidden;\n  position: absolute;\n  top: 50%;\n  right: 6px;\n  -webkit-transform: translateY(-50%);\n  transform: translateY(-50%);\n  opacity: .3;\n}\n.vc-easyclearinput-component .input-box .clear-it.has-icon {\n  right: 28px;\n}\n.vc-easyclearinput-component .info-text {\n  position: absolute;\n  top: -22px;\n}\n.vc-easyclearinput-component .info-text.with-success {\n  color: #87d068;\n}\n.vc-easyclearinput-component .info-text.with-warning {\n  color: #fa0;\n}\n.vc-easyclearinput-component .info-text.with-error {\n  color: #f50;\n}\n", ""]);
 
 // exports
 
 
 /***/ },
-/* 5 */
+/* 14 */
 /***/ function(module, exports) {
 
 /*
@@ -449,14 +592,379 @@ module.exports = function() {
 
 
 /***/ },
-/* 6 */
+/* 15 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"vc-easyclearinput-component form-group\">\n        <label for=\"\">{{ label }}</label>\n        <div class=\"input-box\">\n            <input v-el:input :type=\"type\" class=\"form-control\" v-model=\"value\" :placeholder=\"placeholder\" @focus=\"handleFocus\" @blur=\"handleBlur\" @change=\"onChange\" @input=\"onInput\" />\n            <span class=\"clear-it glyphicon glyphicon-remove-circle\" aria-hidden=\"true\" @click=\"handleClear\"></span>\n        </div>\n    </div>";
+module.exports = "<div class=\"vc-easyclearinput-component form-group\" :class=\"[statusClass, { 'has-feedback': icon }]\" :style=\"{ 'width': optionalWidth }\">\n        <label class=\"label-item\">{{ label }}&nbsp;:</label>\n        <div :class=\"{ 'input-box': true, 'input-group': hasSlot }\">\n            <slot name=\"input-before\"></slot>\n            <span v-if=\"!hasSlot\" style=\"width: 1%;display: table-cell\">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->\n            <span v-if=\"icon\" class=\"glyphicon form-control-feedback\" :class=\"iconClass\" aria-hidden=\"true\"></span>\n            <span class=\"clear-it glyphicon glyphicon-remove-circle\" :class=\"{ 'has-icon': icon, 'hide': disabled || readOnly }\" aria-hidden=\"true\" @click=\"handleClear\"></span>\n            <div class=\"info-text\" :class=\"infoTextClass\">{{ infoText }}</div>\n            <input v-el:input :type=\"type\" class=\"form-control\" :disabled=\"disabled\" :readOnly=\"readOnly\" v-model=\"value\" :placeholder=\"placeholder\" @focus=\"handleFocus\" @blur=\"handleBlur\" @change=\"onChange\" @input=\"onInput\" />\n        </div>\n    </div>";
 
 /***/ },
-/* 7 */
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+__webpack_require__(42);
+module.exports = __webpack_require__(0).Number.isInteger;
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+__webpack_require__(43);
+module.exports = __webpack_require__(0).Object.keys;
+
+/***/ },
+/* 18 */
 /***/ function(module, exports) {
+
+module.exports = function(it){
+  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(1);
+module.exports = function(it){
+  if(!isObject(it))throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+// false -> Array#indexOf
+// true  -> Array#includes
+var toIObject = __webpack_require__(9)
+  , toLength  = __webpack_require__(38)
+  , toIndex   = __webpack_require__(37);
+module.exports = function(IS_INCLUDES){
+  return function($this, el, fromIndex){
+    var O      = toIObject($this)
+      , length = toLength(O.length)
+      , index  = toIndex(fromIndex, length)
+      , value;
+    // Array#includes uses SameValueZero equality algorithm
+    if(IS_INCLUDES && el != el)while(length > index){
+      value = O[index++];
+      if(value != value)return true;
+    // Array#toIndex ignores holes, Array#includes - not
+    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+      if(O[index] === el)return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function(it){
+  return toString.call(it).slice(8, -1);
+};
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+// optional / simple context binding
+var aFunction = __webpack_require__(18);
+module.exports = function(fn, that, length){
+  aFunction(fn);
+  if(that === undefined)return fn;
+  switch(length){
+    case 1: return function(a){
+      return fn.call(that, a);
+    };
+    case 2: return function(a, b){
+      return fn.call(that, a, b);
+    };
+    case 3: return function(a, b, c){
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function(/* ...args */){
+    return fn.apply(that, arguments);
+  };
+};
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(1)
+  , document = __webpack_require__(4).document
+  // in old IE typeof document.createElement is 'object'
+  , is = isObject(document) && isObject(document.createElement);
+module.exports = function(it){
+  return is ? document.createElement(it) : {};
+};
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+// IE 8- don't enum bug keys
+module.exports = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function(it, key){
+  return hasOwnProperty.call(it, key);
+};
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+var dP         = __webpack_require__(30)
+  , createDesc = __webpack_require__(34);
+module.exports = __webpack_require__(2) ? function(object, key, value){
+  return dP.f(object, key, createDesc(1, value));
+} : function(object, key, value){
+  object[key] = value;
+  return object;
+};
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+module.exports = !__webpack_require__(2) && !__webpack_require__(3)(function(){
+  return Object.defineProperty(__webpack_require__(23)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+});
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = __webpack_require__(21);
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+// 20.1.2.3 Number.isInteger(number)
+var isObject = __webpack_require__(1)
+  , floor    = Math.floor;
+module.exports = function isInteger(it){
+  return !isObject(it) && isFinite(it) && floor(it) === it;
+};
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+var anObject       = __webpack_require__(19)
+  , IE8_DOM_DEFINE = __webpack_require__(27)
+  , toPrimitive    = __webpack_require__(40)
+  , dP             = Object.defineProperty;
+
+exports.f = __webpack_require__(2) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if(IE8_DOM_DEFINE)try {
+    return dP(O, P, Attributes);
+  } catch(e){ /* empty */ }
+  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+  if('value' in Attributes)O[P] = Attributes.value;
+  return O;
+};
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+var has          = __webpack_require__(25)
+  , toIObject    = __webpack_require__(9)
+  , arrayIndexOf = __webpack_require__(20)(false)
+  , IE_PROTO     = __webpack_require__(35)('IE_PROTO');
+
+module.exports = function(object, names){
+  var O      = toIObject(object)
+    , i      = 0
+    , result = []
+    , key;
+  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while(names.length > i)if(has(O, key = names[i++])){
+    ~arrayIndexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys       = __webpack_require__(31)
+  , enumBugKeys = __webpack_require__(24);
+
+module.exports = Object.keys || function keys(O){
+  return $keys(O, enumBugKeys);
+};
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+// most Object methods by ES6 should accept primitives
+var $export = __webpack_require__(7)
+  , core    = __webpack_require__(0)
+  , fails   = __webpack_require__(3);
+module.exports = function(KEY, exec){
+  var fn  = (core.Object || {})[KEY] || Object[KEY]
+    , exp = {};
+  exp[KEY] = exec(fn);
+  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+};
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+module.exports = function(bitmap, value){
+  return {
+    enumerable  : !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable    : !(bitmap & 4),
+    value       : value
+  };
+};
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+var shared = __webpack_require__(36)('keys')
+  , uid    = __webpack_require__(41);
+module.exports = function(key){
+  return shared[key] || (shared[key] = uid(key));
+};
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(4)
+  , SHARED = '__core-js_shared__'
+  , store  = global[SHARED] || (global[SHARED] = {});
+module.exports = function(key){
+  return store[key] || (store[key] = {});
+};
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__(8)
+  , max       = Math.max
+  , min       = Math.min;
+module.exports = function(index, length){
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+// 7.1.15 ToLength
+var toInteger = __webpack_require__(8)
+  , min       = Math.min;
+module.exports = function(it){
+  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+// 7.1.13 ToObject(argument)
+var defined = __webpack_require__(6);
+module.exports = function(it){
+  return Object(defined(it));
+};
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = __webpack_require__(1);
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function(it, S){
+  if(!isObject(it))return it;
+  var fn, val;
+  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
+  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+/***/ },
+/* 41 */
+/***/ function(module, exports) {
+
+var id = 0
+  , px = Math.random();
+module.exports = function(key){
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+// 20.1.2.3 Number.isInteger(number)
+var $export = __webpack_require__(7);
+
+$export($export.S, 'Number', {isInteger: __webpack_require__(29)});
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 Object.keys(O)
+var toObject = __webpack_require__(39)
+  , $keys    = __webpack_require__(32);
+
+__webpack_require__(33)('keys', function(){
+  return function keys(it){
+    return $keys(toObject(it));
+  };
+});
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(16), __esModule: true };
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(17), __esModule: true };
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
@@ -464,12 +972,27 @@ module.exports = "<div class=\"vc-easyclearinput-component form-group\">\n      
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _isInteger = __webpack_require__(44);
+
+var _isInteger2 = _interopRequireDefault(_isInteger);
+
+var _keys = __webpack_require__(45);
+
+var _keys2 = _interopRequireDefault(_keys);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // <template>
-//     <div class="vc-easyclearinput-component form-group">
-//         <label for="">{{ label }}</label>
-//         <div class="input-box">
-//             <input v-el:input :type="type" class="form-control" v-model="value" :placeholder="placeholder" @focus="handleFocus" @blur="handleBlur" @change="onChange" @input="onInput" />
-//             <span class="clear-it glyphicon glyphicon-remove-circle" aria-hidden="true" @click="handleClear"></span>
+//     <div class="vc-easyclearinput-component form-group" :class="[statusClass, { 'has-feedback': icon }]" :style="{ 'width': optionalWidth }">
+//         <label class="label-item">{{ label }}&nbsp;:</label>
+//         <div :class="{ 'input-box': true, 'input-group': hasSlot }">
+//             <slot name="input-before"></slot>
+//             <span v-if="!hasSlot" style="width: 1%;display: table-cell">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->
+//             <span v-if="icon" class="glyphicon form-control-feedback" :class="iconClass" aria-hidden="true"></span>
+//             <span class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': disabled || readOnly }" aria-hidden="true" @click="handleClear"></span>
+//             <div class="info-text" :class="infoTextClass">{{ infoText }}</div>
+//             <input v-el:input :type="type" class="form-control" :disabled="disabled" :readOnly="readOnly" v-model="value" :placeholder="placeholder" @focus="handleFocus" @blur="handleBlur" @change="onChange" @input="onInput" />
 //         </div>
 //     </div>
 // </template>
@@ -478,10 +1001,27 @@ Object.defineProperty(exports, "__esModule", {
 // // container
 // .vc-easyclearinput-component {
 
+//     .label-item {
+//         font-weight: normal;
+//         margin-right: 5px;
+//         display: table;
+//         vertical-align: bottom;
+//         float: left;
+//         height: 34px;
+//         line-height: 34px;
+//     }
+
+//     .glyphicon {
+//         z-index: 9;
+//     }
+
 //     .input-box {
-//         display: inline-block;
+//         display: table;
 //         position: relative;
 
+//         .form-control {
+//             width: 100%;
+//         }
 //         &:hover {
 //             .clear-it {
 //                 visibility: visible;
@@ -497,6 +1037,28 @@ Object.defineProperty(exports, "__esModule", {
 //             -webkit-transform: translateY(-50%);
 //             transform: translateY(-50%);
 //             opacity: .3;
+
+//             &.has-icon {
+//                 right: 28px;
+//             }
+//         }
+//     }
+
+//     @success: #87d068;
+//     @warning: #fa0;
+//     @error: #f50;
+//     .info-text {
+//         position: absolute;
+//         top: -22px;
+
+//         &.with-success {
+//             color: @success;
+//         }
+//         &.with-warning {
+//             color: @warning;
+//         }
+//         &.with-error {
+//             color: @error;
 //         }
 //     }
 
@@ -508,18 +1070,42 @@ var EVENT_DELAY = 128;
 
 exports.default = {
     props: {
+        type: {
+            type: String,
+            default: 'text'
+        },
         value: {
             twoWay: true
         },
         label: String,
         placeholder: String,
-        type: {
+        infoText: {
             type: String,
-            default: 'text'
+            default: ''
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        readOnly: {
+            type: Boolean,
+            default: false
         },
         autofocus: {
             type: Boolean,
             default: false
+        },
+        width: {
+            type: [Number, String],
+            default: '250'
+        },
+        icon: {
+            type: Boolean,
+            default: false
+        },
+        status: {
+            type: String,
+            default: ''
         },
         onInput: {
             type: Function,
@@ -544,7 +1130,8 @@ exports.default = {
     },
     data: function data() {
         return {
-            isClear: false
+            isClear: false,
+            hasSlot: true
         };
     },
     created: function created() {},
@@ -552,8 +1139,39 @@ exports.default = {
         if (this.autofocus) {
             this.focusInput();
         }
+        var keys = (0, _keys2.default)(this._slotContents);
+        this.hasSlot = keys.some(function (item, index) {
+            return item === 'input-before';
+        });
     },
-    computed: {},
+    computed: {
+        optionalWidth: function optionalWidth() {
+            if (this.width == null || this.width === '') {
+                return null;
+            }
+            if ((0, _isInteger2.default)(+this.width)) {
+                return this.width + 'px';
+            }
+            return this.width;
+        },
+        statusClass: function statusClass() {
+            return 'has-' + this.status;
+        },
+        infoTextClass: function infoTextClass() {
+            return 'with-' + this.status;
+        },
+        iconClass: function iconClass() {
+            if (this.status === 'success') {
+                return 'glyphicon-ok';
+            }
+            if (this.status === 'warning') {
+                return 'glyphicon-warning-sign';
+            }
+            if (this.status === 'error') {
+                return 'glyphicon-remove';
+            }
+        }
+    },
     watch: {
         autofocus: function autofocus(val) {
             if (val) {
@@ -589,10 +1207,13 @@ exports.default = {
         },
         handleClear: function handleClear() {
             // console.log(2)
-            this.isClear = true;
-            this.value = '';
-            this.onClear();
-            this.focusInput();
+            // 可编辑状态下
+            if (!this.disabled && !this.readOnly) {
+                this.isClear = true;
+                this.value = '';
+                this.onClear();
+                this.focusInput();
+            }
         },
         handleFocus: function handleFocus(e) {
             var _this2 = this;
@@ -612,13 +1233,13 @@ exports.default = {
 // </script>
 
 /***/ },
-/* 8 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var _Easyclearinput = __webpack_require__(1);
+var _Easyclearinput = __webpack_require__(10);
 
 var _Easyclearinput2 = _interopRequireDefault(_Easyclearinput);
 

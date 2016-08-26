@@ -1,5 +1,14 @@
 <h1 align="center">vc-easyclearinput - @changelog</h1>
 
+## 0.2.0 `tag - v0.2.0`
+
+`2016-08-26`
+
+- 新增 `width`, `disabled`, `readOnly`, `icon`, `status`, `infoText` 等
+- 设置默认宽度为`220px`
+- 确定不增加value校验功能，交给父组件或专业的第三方插件
+- 更新demo
+
 ## 0.1.2
 
 `2016-0824`
