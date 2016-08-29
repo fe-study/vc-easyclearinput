@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["VueComponentDemo"] = factory();
+		exports["vcEasyclearinput"] = factory();
 	else
-		root["VueComponentDemo"] = factory();
+		root["vcEasyclearinput"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -10734,7 +10734,7 @@ var _typeof3 = _interopRequireDefault2(_typeof2);
 function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (function webpackUniversalModuleDefinition(root, factory) {
-  if (( false ? 'undefined' : (0, _typeof3.default)(exports)) === 'object' && ( false ? 'undefined' : (0, _typeof3.default)(module)) === 'object') module.exports = factory();else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ((typeof exports === 'undefined' ? 'undefined' : (0, _typeof3.default)(exports)) === 'object') exports["VueComponentsName"] = factory();else root["VueComponentsName"] = factory();
+  if (( false ? 'undefined' : (0, _typeof3.default)(exports)) === 'object' && ( false ? 'undefined' : (0, _typeof3.default)(module)) === 'object') module.exports = factory();else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ((typeof exports === 'undefined' ? 'undefined' : (0, _typeof3.default)(exports)) === 'object') exports["vcEasyclearinput"] = factory();else root["vcEasyclearinput"] = factory();
 })(undefined, function () {
   return (/******/function (modules) {
       // webpackBootstrap
@@ -11257,8 +11257,8 @@ function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { d
       if (false) {
         // When the styles change, update the <style> tags
         if (!content.locals) {
-          module.hot.accept("!!./../../../node_modules/.0.21.0@css-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-522b0c3a&file=Easyclearinput.vue!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Easyclearinput.vue", function () {
-            var newContent = require("!!./../../../node_modules/.0.21.0@css-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-522b0c3a&file=Easyclearinput.vue!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Easyclearinput.vue");
+          module.hot.accept("!!./../../../node_modules/.0.21.0@css-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-6aee9ba7&file=Easyclearinput.vue!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Easyclearinput.vue", function () {
+            var newContent = require("!!./../../../node_modules/.0.21.0@css-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-6aee9ba7&file=Easyclearinput.vue!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Easyclearinput.vue");
             if (typeof newContent === 'string') newContent = [[module.id, newContent, '']];
             update(newContent);
           });
@@ -11343,7 +11343,7 @@ function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { d
     /* 15 */
     /***/function (module, exports) {
 
-      module.exports = "<div class=\"vc-easyclearinput-component form-group\" :class=\"[statusClass, { 'has-feedback': icon }]\" :style=\"{ 'width': optionalWidth }\">\n        <label class=\"label-item\">{{ label }}&nbsp;:</label>\n        <div :class=\"{ 'input-box': true, 'input-group': hasSlot }\">\n            <slot name=\"input-before\"></slot>\n            <span v-if=\"!hasSlot\" style=\"width: 1%;display: table-cell\">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->\n            <span v-if=\"icon\" class=\"glyphicon form-control-feedback\" :class=\"iconClass\" aria-hidden=\"true\"></span>\n            <span class=\"clear-it glyphicon glyphicon-remove-circle\" :class=\"{ 'has-icon': icon, 'hide': disabled || readOnly }\" aria-hidden=\"true\" @click=\"handleClear\"></span>\n            <div class=\"info-text\" :class=\"infoTextClass\">{{ infoText }}</div>\n            <input v-el:input :type=\"type\" class=\"form-control\" :disabled=\"disabled\" :readOnly=\"readOnly\" v-model=\"value\" :placeholder=\"placeholder\" @focus=\"handleFocus\" @blur=\"handleBlur\" @change=\"onChange\" @input=\"onInput\" />\n        </div>\n    </div>";
+      module.exports = "<div class=\"vc-easyclearinput-component form-group\" :class=\"[statusClass, { 'has-feedback': icon }]\" :style=\"{ 'width': optionalWidth }\">\n        <label class=\"label-item\">{{ label }}&nbsp;:</label>\n        <div :class=\"{ 'input-box': true, 'input-group': hasSlot }\">\n            <slot name=\"input-before\"></slot>\n            <span v-if=\"!hasSlot\" style=\"width: 1%;display: table-cell\">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->\n            <span v-if=\"icon\" class=\"glyphicon form-control-feedback\" :class=\"iconClass\" aria-hidden=\"true\"></span>\n            <span @click=\"handleClear\" class=\"clear-it glyphicon glyphicon-remove-circle\" :class=\"{ 'has-icon': icon, 'hide': disabled || readOnly }\" aria-hidden=\"true\"></span>\n            <div class=\"info-text\" :class=\"infoTextClass\">{{ infoText }}</div>\n            <input class=\"form-control\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readOnly=\"readOnly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            />\n        </div>\n    </div>";
 
       /***/
     },
@@ -11762,13 +11762,13 @@ function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { d
         value: true
       });
 
-      var _isInteger = __webpack_require__(44);
-
-      var _isInteger2 = _interopRequireDefault(_isInteger);
-
       var _keys = __webpack_require__(45);
 
       var _keys2 = _interopRequireDefault(_keys);
+
+      var _isInteger = __webpack_require__(44);
+
+      var _isInteger2 = _interopRequireDefault(_isInteger);
 
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { default: obj };
@@ -11781,9 +11781,18 @@ function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { d
       //             <slot name="input-before"></slot>
       //             <span v-if="!hasSlot" style="width: 1%;display: table-cell">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->
       //             <span v-if="icon" class="glyphicon form-control-feedback" :class="iconClass" aria-hidden="true"></span>
-      //             <span class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': disabled || readOnly }" aria-hidden="true" @click="handleClear"></span>
+      //             <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': disabled || readOnly }" aria-hidden="true"></span>
       //             <div class="info-text" :class="infoTextClass">{{ infoText }}</div>
-      //             <input v-el:input :type="type" class="form-control" :disabled="disabled" :readOnly="readOnly" v-model="value" :placeholder="placeholder" @focus="handleFocus" @blur="handleBlur" @change="onChange" @input="onInput" />
+      //             <input class="form-control"
+      //                 v-el:input
+      //                 :type="type"
+      //                 :disabled="disabled"
+      //                 :readOnly="readOnly"
+      //                 v-model="value"
+      //                 :placeholder="placeholder"
+      //                 @focus="handleFocus"
+      //                 @blur="handleBlur"
+      //             />
       //         </div>
       //     </div>
       // </template>
@@ -11861,6 +11870,10 @@ function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { d
 
       exports.default = {
         props: {
+          name: {
+            type: String,
+            default: 'vc-easyclearinput' + Date.now()
+          },
           type: {
             type: String,
             default: 'text'
@@ -11898,23 +11911,15 @@ function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { d
             type: String,
             default: ''
           },
-          onInput: {
+          onFocus: { // focus回调
             type: Function,
             default: function _default() {}
           },
-          onChange: {
+          onBlur: { // blur回调
             type: Function,
             default: function _default() {}
           },
-          onFocus: {
-            type: Function,
-            default: function _default() {}
-          },
-          onBlur: {
-            type: Function,
-            default: function _default() {}
-          },
-          onClear: {
+          onClear: { // onClear回调
             type: Function,
             default: function _default() {}
           }
@@ -11930,10 +11935,10 @@ function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { d
           if (this.autofocus) {
             this.focusInput();
           }
-          var keys = (0, _keys2.default)(this._slotContents);
-          this.hasSlot = keys.some(function (item, index) {
-            return item === 'input-before';
-          });
+          // 检查是否有用户自定义slot传入(input-before)
+          this.checkSlot();
+          // 检查用户是否内联了不该内联的事件(focus & blur)
+          this.checkEvents();
         },
         computed: {
           optionalWidth: function optionalWidth() {
@@ -11971,6 +11976,23 @@ function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { d
           }
         },
         methods: {
+          checkSlot: function checkSlot() {
+            var keys = (0, _keys2.default)(this._slotContents);
+            this.hasSlot = keys.some(function (item, index) {
+              return item === 'input-before';
+            });
+          },
+          checkEvents: function checkEvents() {
+            var focus = this._events.focus;
+            if (focus && focus.length > 0) {
+              console.warn('if you want to listen on focus event, please use `:on-focus` callback!');
+            }
+            var blur = this._events.blur;
+            if (blur && blur.length > 0) {
+              console.warn('if you want to listen on blur event, please use `:on-blur` callback!');
+            }
+          },
+
           /**
            * 点击清除按钮
            * 1. blur 2. clear 3.focus again

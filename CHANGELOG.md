@@ -1,5 +1,15 @@
 <h1 align="center">vc-easyclearinput - @changelog</h1>
 
+## 0.3.0
+
+`2016-08-29`
+
+- 去除 `@input`, `@change` 等预埋在模板里的事件，直接在自定义组件上使用
+- `onFocus`, `onBlur` 等已经被hack的事件还需使用回调传递进来
+  - 外界直接使用会被内部覆盖
+  - 组件会检测外界是否以 `@focus`, `@blur` 的形式传入了事件，如果是, 给出warn并提示使用 `相应的props回调`
+- update demo
+
 ## 0.2.0 `tag - v0.2.0`
 
 `2016-08-26`

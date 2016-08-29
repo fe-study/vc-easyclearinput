@@ -51,11 +51,12 @@
             :width="width"
             :icon="icon"
             :status="status"
-            :on-input="onInput"
-            :on-change="onChange"
+            :on-clear="onClear"
             :on-focus="onFocus"
             :on-blur="onBlur"
-            :on-clear="onClear"
+            @input="onInput"
+            @change="onChange"
+            oninput="console.log('native oninput, DOM2.0 inline event style')"
         >
         </vc-easyclearinput>
 
@@ -72,11 +73,12 @@
             :width="width"
             :icon="icon"
             :status="status"
-            :on-input="onInput"
-            :on-change="onChange"
+            :on-clear="onClear"
             :on-focus="onFocus"
             :on-blur="onBlur"
-            :on-clear="onClear"
+            @input="onInput"
+            @change="onChange"
+            oninput="console.log('native oninput, DOM2.0 inline event style')"
         >
             <span slot="input-before" class="input-group-addon">@</span>
         </vc-easyclearinput>
