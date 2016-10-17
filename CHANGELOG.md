@@ -1,5 +1,17 @@
 <h1 align="center">vc-easyclearinput - @changelog</h1>
 
+## 0.3.2
+
+`2016-10-09`
+
+- es6化，去除 `name`
+
+## 0.3.1
+
+`2016-09-09`
+
+- 新增 `textarea` type类型，支持textarea
+
 ## 0.3.0
 
 `2016-08-29`
@@ -21,7 +33,7 @@
 
 ## 0.1.2
 
-`2016-0824`
+`2016-08-24`
 
 - 修正 `autofocus` 功能
 

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import vcEasyclearinput from '../dist/build.js'
+import vcEasyclearinput from '../src'
 
 new Vue({
     el: '#app',
@@ -14,7 +14,7 @@ new Vue({
             type: "text",
             autofocus: true,
             disabled: false,
-            readOnly: false,
+            readonly: false,
             value: 'content',
             placeholder: 'placeholder',
             infoText: '请输入正确的用户名',
@@ -40,7 +40,7 @@ new Vue({
     },
     methods: {
         commonFn () {
-            this.readOnly = false
+            this.readonly = false
             this.disabled = false
             this.noSlot = true
             this.status = ''
@@ -48,14 +48,14 @@ new Vue({
             this.infoText = ''
         },
         successIconFn () {
-            this.readOnly = false
+            this.readonly = false
             this.disabled = false
             this.icon = true
             this.noSlot = true
             this.status = 'success'
         },
         emailFn () {
-            this.readOnly = false
+            this.readonly = false
             this.disabled = false
             this.icon = true
             this.status = 'error'
@@ -63,12 +63,12 @@ new Vue({
             this.noSlot = false
         },
         disabledFn () {
-            this.readOnly = false
+            this.readonly = false
             this.disabled = true
         },
-        readOnlyFn () {
+        readonlyFn () {
             this.disabled = false
-            this.readOnly = true
+            this.readonly = true
         }
     },
     components: {

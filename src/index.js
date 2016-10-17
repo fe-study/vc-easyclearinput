@@ -1,3 +1,4 @@
-import vcEasyclearinput from './components/Easyclearinput'
+import vcEasyclearinput from './Easyclearinput'
 
-module.exports = vcEasyclearinput
+export default vcEasyclearinput
+export { vcEasyclearinput }

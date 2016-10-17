@@ -38,6 +38,13 @@
 
     <div id="app" class="container" v-cloak>
 
+        <button class="btn btn-info" @click="commonFn">普通版</button>
+        <button class="btn btn-success" @click="successIconFn">带success图标</button>
+        <button class="btn btn-danger" @click="emailFn">带邮箱@符号</button>
+        <button class="btn btn-default" @click="disabledFn">disabled</button>
+        <button class="btn btn-default" @click="readonlyFn">readonly</button>
+        <hr style="padding-bottom: 15px;">
+
         <vc-easyclearinput
             v-if="noSlot"
             :type="type"
@@ -47,7 +54,7 @@
             :value.sync="value"
             :autofocus="autofocus"
             :disabled="disabled"
-            :read-only="readOnly"
+            :readonly="readonly"
             :width="width"
             :icon="icon"
             :status="status"
@@ -56,7 +63,7 @@
             :on-blur="onBlur"
             @input="onInput"
             @change="onChange"
-            oninput="console.log('native oninput, DOM2.0 inline event style')"
+            oninput="console.log('native oninput, DOM0 inline event style')"
         >
         </vc-easyclearinput>
 
@@ -69,7 +76,7 @@
             :info-text="infoText"
             :autofocus="autofocus"
             :disabled="disabled"
-            :read-only="readOnly"
+            :readonly="readonly"
             :width="width"
             :icon="icon"
             :status="status"
@@ -78,16 +85,10 @@
             :on-blur="onBlur"
             @input="onInput"
             @change="onChange"
-            oninput="console.log('native oninput, DOM2.0 inline event style')"
+            oninput="console.log('native oninput, DOM0 inline event style')"
         >
             <span slot="input-before" class="input-group-addon">@</span>
         </vc-easyclearinput>
-
-        <button class="btn btn-info" @click="commonFn">普通版</button>
-        <button class="btn btn-success" @click="successIconFn">带success图标</button>
-        <button class="btn btn-danger" @click="emailFn">带邮箱@符号</button>
-        <button class="btn btn-default" @click="disabledFn">disabled</button>
-        <button class="btn btn-default" @click="readOnlyFn">readOnly</button>
 
         <hr>
 
@@ -103,7 +104,7 @@
         </div>
 
         <div class="form-group">
-            <label>配置组件的type</label>
+            <label>配置组件的type(textarea也支持)</label>
             <input type="text" class="form-control" type="type" v-model="type" />
         </div>
 
@@ -147,9 +148,9 @@
         </div>
 
         <div class="form-group">
-            <div>配置组件的readOnly - (默认: false)</div>
-            <label><input type="radio" :value="bools.true" name="readOnly" v-model="readOnly">是</label>
-            <label><input type="radio" :value="bools.false" name="readOnly" v-model="readOnly">否</label>
+            <div>配置组件的readonly - (默认: false)</div>
+            <label><input type="radio" :value="bools.true" name="readonly" v-model="readonly">是</label>
+            <label><input type="radio" :value="bools.false" name="readonly" v-model="readonly">否</label>
         </div>
 
         <div class="form-group">

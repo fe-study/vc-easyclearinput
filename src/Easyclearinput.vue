@@ -5,18 +5,32 @@
             <slot name="input-before"></slot>
             <span v-if="!hasSlot" style="width: 1%;display: table-cell">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->
             <span v-if="icon" class="glyphicon form-control-feedback" :class="iconClass" aria-hidden="true"></span>
-            <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': disabled || readOnly }" aria-hidden="true"></span>
+            <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': disabled || readonly }" aria-hidden="true"></span>
             <div class="info-text" :class="infoTextClass">{{ infoText }}</div>
             <input class="form-control"
+                v-if="type !== 'textarea'"
                 v-el:input
                 :type="type"
                 :disabled="disabled"
-                :readOnly="readOnly"
+                :readonly="readonly"
                 v-model="value"
                 :placeholder="placeholder"
                 @focus="handleFocus"
                 @blur="handleBlur"
             />
+            <textarea 
+                v-if="type === 'textarea'"
+                class="form-control"
+                v-el:input
+                :type="type"
+                :disabled="disabled"
+                :readonly="readonly"
+                v-model="value"
+                :placeholder="placeholder"
+                @focus="handleFocus"
+                @blur="handleBlur"
+            >
+            </textarea
         </div>
     </div>
 </template>
@@ -33,6 +47,10 @@
         float: left;
         height: 34px;
         line-height: 34px;
+    }
+
+    textarea.form-control {
+        resize: vertical;
     }
 
     .glyphicon {
@@ -93,11 +111,8 @@
 const EVENT_DELAY = 128
 
 export default {
+    name: 'vc-easyclearinput',
     props: {
-        name: {
-            type: String,
-            default: 'vc-easyclearinput' + Date.now()
-        },
         type: {
             type: String,
             default: 'text'
@@ -115,7 +130,7 @@ export default {
             type: Boolean,
             default: false
         },
-        readOnly: {
+        readonly: {
             type: Boolean,
             default: false
         },
@@ -148,16 +163,16 @@ export default {
             default: function () {}
         }
     },
-    data: function () {
+    data () {
         return {
             isClear: false,
             hasSlot: true 
         }
     },
-    created: function () {
+    created () {
 
     },
-    ready: function () {
+    ready () {
         if (this.autofocus) {
             this.focusInput()
         }
@@ -224,10 +239,10 @@ export default {
          * 事件修正，使得小叉号成为类似系统原生的和input一体的控件，
          * 点击小叉号不应该带来input的失焦还有相应事件的响应
          */
-        focusInput: function () { // 工具方法
+        focusInput () { // 工具方法
             this.$els.input && this.$els.input.focus()
         },
-        handleBlur: function (e) {
+        handleBlur (e) {
             // console.log(1)
             setTimeout(() => {
                 if (!this.isClear) {
@@ -240,17 +255,17 @@ export default {
                 // this.isClear = false
             }, EVENT_DELAY)
         },
-        handleClear: function () {
+        handleClear () {
             // console.log(2)
             // 可编辑状态下
-            if (!this.disabled && !this.readOnly) {
+            if (!this.disabled && !this.readonly) {
                 this.isClear = true
                 this.value = ''
                 this.onClear()
                 this.focusInput()
             }
         },
-        handleFocus: function (e) {
+        handleFocus (e) {
             // console.log(3)
             setTimeout(() => {
                 if (!this.isClear) {
@@ -259,12 +274,6 @@ export default {
                 this.isClear = false
             }, EVENT_DELAY + 10)
         }
-    },
-    beforeDestroy: function () {
-
-    },
-    destroy: function () {
-
     }
 }
 </script>
