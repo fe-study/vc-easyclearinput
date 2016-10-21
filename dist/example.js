@@ -10838,7 +10838,7 @@ module.exports = function() {
 /* 17 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"vc-easyclearinput-component form-group\" :class=\"[statusClass, { 'has-feedback': icon }]\" :style=\"{ 'width': optionalWidth }\">\n        <label class=\"label-item\">{{ label }}&nbsp;:</label>\n        <div :class=\"{ 'input-box': true, 'input-group': hasSlot }\">\n            <slot name=\"input-before\"></slot>\n            <span v-if=\"!hasSlot\" style=\"width: 1%;display: table-cell\">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->\n            <span v-if=\"icon\" class=\"glyphicon form-control-feedback\" :class=\"iconClass\" aria-hidden=\"true\"></span>\n            <span @click=\"handleClear\" class=\"clear-it glyphicon glyphicon-remove-circle\" :class=\"{ 'has-icon': icon, 'hide': disabled || readonly }\" aria-hidden=\"true\"></span>\n            <div class=\"info-text\" :class=\"infoTextClass\">{{ infoText }}</div>\n            <input class=\"form-control\"\n                v-if=\"type !== 'textarea'\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readonly=\"readonly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            />\n            <textarea \n                v-if=\"type === 'textarea'\"\n                class=\"form-control\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readonly=\"readonly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            >\n            </textarea\n        </div>\n    </div>\n</template>";
+module.exports = "<div class=\"vc-easyclearinput-component form-group\" :class=\"[statusClass, { 'has-feedback': icon }]\" :style=\"{ 'width': optionalWidth }\">\n        <label class=\"label-item\">{{ label }}&nbsp;:</label>\n        <div :class=\"{ 'input-box': true, 'input-group': hasSlot }\">\n            <slot name=\"input-before\"></slot>\n            <span v-if=\"!hasSlot\" style=\"width: 1%;display: table-cell\">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->\n            <span v-if=\"icon\" class=\"glyphicon form-control-feedback\" :class=\"iconClass\" aria-hidden=\"true\"></span>\n            <span @click=\"handleClear\" class=\"clear-it glyphicon glyphicon-remove-circle\" :class=\"{ 'has-icon': icon, 'hide': hideClearIcon }\" aria-hidden=\"true\"></span>\n            <div class=\"info-text\" :class=\"infoTextClass\">{{ infoText }}</div>\n            <input class=\"form-control\"\n                v-if=\"type !== 'textarea'\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readonly=\"readonly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            />\n            <textarea \n                v-if=\"type === 'textarea'\"\n                class=\"form-control\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readonly=\"readonly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            >\n            </textarea\n        </div>\n    </div>\n</template>";
 
 /***/ },
 /* 18 */
@@ -11258,7 +11258,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //             <slot name="input-before"></slot>
 //             <span v-if="!hasSlot" style="width: 1%;display: table-cell">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->
 //             <span v-if="icon" class="glyphicon form-control-feedback" :class="iconClass" aria-hidden="true"></span>
-//             <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': disabled || readonly }" aria-hidden="true"></span>
+//             <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': hideClearIcon }" aria-hidden="true"></span>
 //             <div class="info-text" :class="infoTextClass">{{ infoText }}</div>
 //             <input class="form-control"
 //                 v-if="type !== 'textarea'"
@@ -11434,6 +11434,9 @@ exports.default = {
     },
 
     computed: {
+        hideClearIcon: function hideClearIcon() {
+            return this.value == null || this.value === '' || this.disabled || this.readonly;
+        },
         optionalWidth: function optionalWidth() {
             if (this.width == null || this.width === '') {
                 return null;

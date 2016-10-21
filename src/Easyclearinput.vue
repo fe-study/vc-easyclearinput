@@ -5,7 +5,7 @@
             <slot name="input-before"></slot>
             <span v-if="!hasSlot" style="width: 1%;display: table-cell">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->
             <span v-if="icon" class="glyphicon form-control-feedback" :class="iconClass" aria-hidden="true"></span>
-            <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': disabled || readonly }" aria-hidden="true"></span>
+            <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': hideClearIcon }" aria-hidden="true"></span>
             <div class="info-text" :class="infoTextClass">{{ infoText }}</div>
             <input class="form-control"
                 v-if="type !== 'textarea'"
@@ -182,6 +182,9 @@ export default {
         this.checkEvents()
     },
     computed: {
+        hideClearIcon () {
+            return (this.value == null) || (this.value === '') || this.disabled || this.readonly
+        },
         optionalWidth () {
             if (this.width == null || this.width === '') {
                 return null

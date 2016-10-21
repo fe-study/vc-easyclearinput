@@ -1,5 +1,11 @@
 <h1 align="center">vc-easyclearinput - @changelog</h1>
 
+## 0.3.3
+
+` 2016-10-21`
+
+- 小清除按钮只有在 `value` 有值时才hover出现
+
 ## 0.3.2
 
 `2016-10-09`
