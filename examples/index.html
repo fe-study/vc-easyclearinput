@@ -41,12 +41,13 @@
         <button class="btn btn-info" @click="commonFn">普通版</button>
         <button class="btn btn-success" @click="successIconFn">带success图标</button>
         <button class="btn btn-danger" @click="emailFn">带邮箱@符号</button>
+        <button class="btn btn-danger" @click="percentFn">带末尾%号</button>
         <button class="btn btn-default" @click="disabledFn">disabled</button>
         <button class="btn btn-default" @click="readonlyFn">readonly</button>
         <hr style="padding-bottom: 15px;">
 
         <vc-easyclearinput
-            v-if="noSlot"
+            v-if="slot === ''"
             :type="type"
             :label="label"
             :placeholder="placeholder"
@@ -68,7 +69,7 @@
         </vc-easyclearinput>
 
         <vc-easyclearinput
-            v-if="!noSlot"
+            v-if="slot === 'before'"
             :type="type"
             :label="label"
             :placeholder="placeholder"
@@ -88,6 +89,29 @@
             oninput="console.log('native oninput, DOM0 inline event style')"
         >
             <span slot="input-before" class="input-group-addon">@</span>
+        </vc-easyclearinput>
+
+        <vc-easyclearinput
+            v-if="slot === 'after'"
+            :type="type"
+            :label="label"
+            :placeholder="placeholder"
+            :value.sync="value"
+            :info-text="infoText"
+            :autofocus="autofocus"
+            :disabled="disabled"
+            :readonly="readonly"
+            :width="width"
+            :icon="icon"
+            :status="status"
+            :on-clear="onClear"
+            :on-focus="onFocus"
+            :on-blur="onBlur"
+            @input="onInput"
+            @change="onChange"
+            oninput="console.log('native oninput, DOM0 inline event style')"
+        >
+            <span slot="input-after" class="input-group-addon">%</span>
         </vc-easyclearinput>
 
         <hr>

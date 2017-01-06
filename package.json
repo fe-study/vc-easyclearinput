@@ -1,7 +1,7 @@
 {
   "author": "indexxuan@gmail.com",
   "name": "vc-easyclearinput",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "an input component based on vue.js & bootstrap",
   "scripts": {
     "start": "webpack-dev-server --inline --hot --quiet",

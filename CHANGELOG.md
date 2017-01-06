@@ -1,5 +1,12 @@
 <h1 align="center">vc-easyclearinput - @changelog</h1>
 
+## 0.4.0
+
+`2017-01-06`
+
+- 新增默认slot
+- 想要使用bootstrap addon class，必须使用具名slot来获得正确的输入框圆角处理
+
 ## 0.3.3
 
 ` 2016-10-21`

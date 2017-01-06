@@ -9,8 +9,8 @@ new Vue({
                 'true': true,
                 'false': false
             },
-            noSlot: true,
-            label: 'label',
+            slot: '',
+            label: 'label：',
             type: "text",
             autofocus: true,
             disabled: false,
@@ -40,9 +40,9 @@ new Vue({
     },
     methods: {
         commonFn () {
+            this.slot = ''
             this.readonly = false
             this.disabled = false
-            this.noSlot = true
             this.status = ''
             this.icon = false
             this.infoText = ''
@@ -51,7 +51,6 @@ new Vue({
             this.readonly = false
             this.disabled = false
             this.icon = true
-            this.noSlot = true
             this.status = 'success'
         },
         emailFn () {
@@ -60,7 +59,15 @@ new Vue({
             this.icon = true
             this.status = 'error'
             this.infoText = '请输入正确的邮箱'
-            this.noSlot = false
+            this.slot = 'before'
+        },
+        percentFn () {
+            this.readonly = false
+            this.disabled = false
+            this.icon = true
+            this.status = 'info'
+            this.infoText = '请输入输入数字，可保留两位小数'
+            this.slot = 'after'
         },
         disabledFn () {
             this.readonly = false

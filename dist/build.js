@@ -530,7 +530,7 @@ exports = module.exports = __webpack_require__(14)();
 
 
 // module
-exports.push([module.i, ".vc-easyclearinput-component .label-item {\n  font-weight: normal;\n  margin-right: 5px;\n  display: table;\n  vertical-align: bottom;\n  float: left;\n  height: 34px;\n  line-height: 34px;\n}\n.vc-easyclearinput-component textarea.form-control {\n  resize: vertical;\n}\n.vc-easyclearinput-component .glyphicon {\n  z-index: 9;\n}\n.vc-easyclearinput-component .input-box {\n  display: table;\n  position: relative;\n}\n.vc-easyclearinput-component .input-box .form-control {\n  width: 100%;\n}\n.vc-easyclearinput-component .input-box:hover .clear-it {\n  visibility: visible;\n}\n.vc-easyclearinput-component .input-box .clear-it {\n  visibility: hidden;\n  position: absolute;\n  top: 50%;\n  right: 6px;\n  -webkit-transform: translateY(-50%);\n  transform: translateY(-50%);\n  opacity: .3;\n}\n.vc-easyclearinput-component .input-box .clear-it.has-icon {\n  right: 28px;\n}\n.vc-easyclearinput-component .info-text {\n  position: absolute;\n  top: -22px;\n}\n.vc-easyclearinput-component .info-text.with-success {\n  color: #87d068;\n}\n.vc-easyclearinput-component .info-text.with-warning {\n  color: #fa0;\n}\n.vc-easyclearinput-component .info-text.with-error {\n  color: #f50;\n}\n", ""]);
+exports.push([module.i, ".vc-easyclearinput-component .label-item {\n  font-weight: normal;\n  display: table;\n  vertical-align: bottom;\n  float: left;\n  height: 34px;\n  line-height: 34px;\n}\n.vc-easyclearinput-component textarea.form-control {\n  resize: vertical;\n}\n.vc-easyclearinput-component .glyphicon {\n  z-index: 9;\n}\n.vc-easyclearinput-component .input-box {\n  display: table;\n  position: relative;\n}\n.vc-easyclearinput-component .input-box .form-control {\n  width: 100%;\n  border-radius: 4px!important;\n}\n.vc-easyclearinput-component .input-box .form-control.slot-before {\n  border-top-left-radius: 0!important;\n  border-bottom-left-radius: 0!important;\n}\n.vc-easyclearinput-component .input-box .form-control.slot-after {\n  border-top-right-radius: 0!important;\n  border-bottom-right-radius: 0!important;\n}\n.vc-easyclearinput-component .input-box:hover .clear-it {\n  visibility: visible;\n}\n.vc-easyclearinput-component .input-box .clear-it {\n  visibility: hidden;\n  position: absolute;\n  top: 50%;\n  right: 6px;\n  -webkit-transform: translateY(-50%);\n  transform: translateY(-50%);\n  opacity: .3;\n}\n.vc-easyclearinput-component .input-box .clear-it.has-icon {\n  right: 28px;\n}\n.vc-easyclearinput-component .info-text {\n  position: absolute;\n  top: -22px;\n}\n.vc-easyclearinput-component .info-text.with-success {\n  color: #87d068;\n}\n.vc-easyclearinput-component .info-text.with-warning {\n  color: #fa0;\n}\n.vc-easyclearinput-component .info-text.with-error {\n  color: #f50;\n}\n", ""]);
 
 // exports
 
@@ -595,7 +595,7 @@ module.exports = function() {
 /* 15 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"vc-easyclearinput-component form-group\" :class=\"[statusClass, { 'has-feedback': icon }]\" :style=\"{ 'width': optionalWidth }\">\n        <label class=\"label-item\">{{ label }}&nbsp;:</label>\n        <div :class=\"{ 'input-box': true, 'input-group': hasSlot }\">\n            <slot name=\"input-before\"></slot>\n            <span v-if=\"!hasSlot\" style=\"width: 1%;display: table-cell\">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->\n            <span v-if=\"icon\" class=\"glyphicon form-control-feedback\" :class=\"iconClass\" aria-hidden=\"true\"></span>\n            <span @click=\"handleClear\" class=\"clear-it glyphicon glyphicon-remove-circle\" :class=\"{ 'has-icon': icon, 'hide': hideClearIcon }\" aria-hidden=\"true\"></span>\n            <div class=\"info-text\" :class=\"infoTextClass\">{{ infoText }}</div>\n            <input class=\"form-control\"\n                v-if=\"type !== 'textarea'\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readonly=\"readonly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            />\n            <textarea \n                v-if=\"type === 'textarea'\"\n                class=\"form-control\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readonly=\"readonly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            >\n            </textarea\n        </div>\n    </div>\n</template>";
+module.exports = "<div class=\"vc-easyclearinput-component form-group\" :class=\"[statusClass, { 'has-feedback': icon }]\" :style=\"{ 'width': optionalWidth }\">\n        <label class=\"label-item\">{{ label }}</label>\n        <div class=\"info-text\" :class=\"infoTextClass\">{{ infoText }}</div>\n        <div :class=\"{ 'input-box': true, 'input-group': (slotBefore || slotAfter)}\">\n            <slot name=\"input-before\"></slot>\n            <span v-if=\"!slot-before || !slot-after\" style=\"width: 1%;display: table-cell\">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->\n            <span v-if=\"icon\" class=\"glyphicon form-control-feedback\" :class=\"iconClass\" aria-hidden=\"true\"></span>\n            <span @click=\"handleClear\" class=\"clear-it glyphicon glyphicon-remove-circle\" :class=\"{ 'has-icon': icon, 'hide': hideClearIcon, 'slot-after': slotAfter }\" aria-hidden=\"true\"></span>\n            <input class=\"form-control\"\n                :class=\"[ 'form-control', slotBefore ? 'slot-before' : '', slotAfter ? 'slot-after' : '' ]\"\n                v-if=\"type !== 'textarea'\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readonly=\"readonly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            />\n            <textarea \n                v-if=\"type === 'textarea'\"\n                class=\"form-control\"\n                v-el:input\n                :type=\"type\"\n                :disabled=\"disabled\"\n                :readonly=\"readonly\"\n                v-model=\"value\"\n                :placeholder=\"placeholder\"\n                @focus=\"handleFocus\"\n                @blur=\"handleBlur\"\n            >\n            </textarea>\n            <slot></slot>\n            <slot name=\"input-after\"></slot>\n        </div>\n    </div>";
 
 /***/ },
 /* 16 */
@@ -985,14 +985,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // <template>
 //     <div class="vc-easyclearinput-component form-group" :class="[statusClass, { 'has-feedback': icon }]" :style="{ 'width': optionalWidth }">
-//         <label class="label-item">{{ label }}&nbsp;:</label>
-//         <div :class="{ 'input-box': true, 'input-group': hasSlot }">
+//         <label class="label-item">{{ label }}</label>
+//         <div class="info-text" :class="infoTextClass">{{ infoText }}</div>
+//         <div :class="{ 'input-box': true, 'input-group': (slotBefore || slotAfter)}">
 //             <slot name="input-before"></slot>
-//             <span v-if="!hasSlot" style="width: 1%;display: table-cell">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->
+//             <span v-if="!slot-before || !slot-after" style="width: 1%;display: table-cell">&nbsp;</span><!-- 占位元素，用于撑开宽度，原因未知 -->
 //             <span v-if="icon" class="glyphicon form-control-feedback" :class="iconClass" aria-hidden="true"></span>
-//             <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': hideClearIcon }" aria-hidden="true"></span>
-//             <div class="info-text" :class="infoTextClass">{{ infoText }}</div>
+//             <span @click="handleClear" class="clear-it glyphicon glyphicon-remove-circle" :class="{ 'has-icon': icon, 'hide': hideClearIcon, 'slot-after': slotAfter }" aria-hidden="true"></span>
 //             <input class="form-control"
+//                 :class="[ 'form-control', slotBefore ? 'slot-before' : '', slotAfter ? 'slot-after' : '' ]"
 //                 v-if="type !== 'textarea'"
 //                 v-el:input
 //                 :type="type"
@@ -1015,7 +1016,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //                 @focus="handleFocus"
 //                 @blur="handleBlur"
 //             >
-//             </textarea
+//             </textarea>
+//             <slot></slot>
+//             <slot name="input-after"></slot>
 //         </div>
 //     </div>
 // </template>
@@ -1026,7 +1029,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //     .label-item {
 //         font-weight: normal;
-//         margin-right: 5px;
 //         display: table;
 //         vertical-align: bottom;
 //         float: left;
@@ -1048,6 +1050,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //         .form-control {
 //             width: 100%;
+//             border-radius: 4px!important; 
+//             &.slot-before {
+//                 border-top-left-radius: 0!important;
+//                 border-bottom-left-radius: 0!important;
+//             }
+//             &.slot-after {
+//                 border-top-right-radius: 0!important;
+//                 border-bottom-right-radius: 0!important;
+//             }
 //         }
 //         &:hover {
 //             .clear-it {
@@ -1064,6 +1075,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //             -webkit-transform: translateY(-50%);
 //             transform: translateY(-50%);
 //             opacity: .3;
+
+//             &.slot-after {
+
+//             }
 
 //             &.has-icon {
 //                 right: 28px;
@@ -1151,7 +1166,8 @@ exports.default = {
     data: function data() {
         return {
             isClear: false,
-            hasSlot: true
+            slotBefore: false,
+            slotAfter: false
         };
     },
     created: function created() {},
@@ -1206,9 +1222,14 @@ exports.default = {
     methods: {
         checkSlot: function checkSlot() {
             var keys = (0, _keys2.default)(this._slotContents);
-            this.hasSlot = keys.some(function (item, index) {
-                return item === 'input-before';
-            });
+            for (var i = 0, len = keys.length; i < len; i++) {
+                if (keys[i] === 'input-before') {
+                    this.slotBefore = true;
+                }
+                if (keys[i] === 'input-after') {
+                    this.slotAfter = true;
+                }
+            }
         },
         checkEvents: function checkEvents() {
             var focus = this._events.focus;
